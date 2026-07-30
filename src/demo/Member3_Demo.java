@@ -39,11 +39,11 @@ class BST {
             return new Bus(route, source, destination, distance);
 
         }
-        if(id < root.busID) {
+        if(route < root.route) {
             root.left = insertRec(root.left, route, source, destination, distance);
 
         }
-        else if(id > root.busID) {
+        else if(route > root.route) {
             root.right = insertRec(root.right, route, source, destination, distance);
         }
         return root;
@@ -70,7 +70,7 @@ class BST {
             System.out.println("Route      : " + root.route);
             System.out.println("Source      : " + root.source);
             System.out.println("Destination : " + root.destination);
-            System.out.println("Distance    : " + root.fdistance);
+            System.out.println("Distance    : " + root.distance);
             System.out.println("-----------------------------");
 
             inorder(root.right);
@@ -100,7 +100,7 @@ class SelectionSort {
 
             for(int j = i+1; j < n; j++) {
 
-                if(buses.get(j).fare < buses.get(min).fare) {
+                if(buses.get(j).distance < buses.get(min).distance) {
                     min = j;
 
                 }
