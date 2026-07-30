@@ -4,21 +4,21 @@ import java.util.Scanner;
 
 class Bus {
 
-    int busID;
-    String busName;
+    int route;
+    String source;
     String destination;
-    double fare;
+    double distance;
 
     Bus left;
     Bus right;
 
 
-    public Bus(int busID, String busName, String destination, double fare) {
+    public Bus(int route, String source, String destination, double distance) {
 
-        this.busID = busID;
-        this.busName = busName;
+        this.route = route;
+        this.source = source;
         this.destination = destination;
-        this.fare = fare;
+        this.distance = distance;
 
         left = null;
         right = null;
@@ -28,37 +28,37 @@ class Bus {
 class BST {
     Bus root;
 
-    public void insert(int id, String name, String destination, double fare) {
-        root = insertRec(root, id, name, destination, fare);
+    public void insert(int route, String source, String destination, double distance) {
+        root = insertRec(root, route, source, destination, distance);
 
     }
 
-    private Bus insertRec(Bus root, int id, String name, String destination, double fare) {
+    private Bus insertRec(Bus root, int route, String source, String destination, double distance) {
 
         if(root == null) {
-            return new Bus(id, name, destination, fare);
+            return new Bus(route, source, destination, distance);
 
         }
         if(id < root.busID) {
-            root.left = insertRec(root.left, id, name, destination, fare);
+            root.left = insertRec(root.left, route, source, destination, distance);
 
         }
         else if(id > root.busID) {
-            root.right = insertRec(root.right, id, name, destination, fare);
+            root.right = insertRec(root.right, route, source, destination, distance);
         }
         return root;
     }
 
-    public Bus search(Bus root, int id) {
+    public Bus search(Bus root, int route) {
 
-        if(root == null || root.busID == id) {
+        if(root == null || root.route == route) {
             return root;
         }
-        if(id < root.busID) {
-            return search(root.left, id);
+        if(route < root.route) {
+            return search(root.left, route);
         }
         else {
-            return search(root.right, id);
+            return search(root.right, route);
         }
     }
 
@@ -67,10 +67,10 @@ class BST {
         if(root != null) {
             inorder(root.left);
 
-            System.out.println("Bus ID      : " + root.busID);
-            System.out.println("Bus Name    : " + root.busName);
+            System.out.println("Route      : " + root.route);
+            System.out.println("Source      : " + root.source);
             System.out.println("Destination : " + root.destination);
-            System.out.println("Fare        : " + root.fare);
+            System.out.println("Distance    : " + root.fdistance);
             System.out.println("-----------------------------");
 
             inorder(root.right);
@@ -119,11 +119,11 @@ public class BusReservationSystem {
         BST tree = new BST();
         Scanner sc = new Scanner(System.in);
 
-        tree.insert(105, "Express", "Colombo", 1200);
-        tree.insert(102, "Super Line", "Kandy", 900);
-        tree.insert(110, "Luxury", "Galle", 1500);
-        tree.insert(101, "City Bus", "Matara", 800);
-        tree.insert(108, "Highway", "Jaffna", 1300);
+        tree.insert(105, "Colombo", "Colombo", 1200);
+        tree.insert(102, "Colombo", "Kandy", 900);
+        tree.insert(110, "Colombo", "Galle", 1500);
+        tree.insert(101, "Colombo", "Matara", 800);
+        tree.insert(108, "Colombo", "Jaffna", 1300);
 
         int choice;
 
@@ -155,10 +155,10 @@ public class BusReservationSystem {
 
                     if(result != null) {
                         System.out.println("\n===== BUS FOUND =====");
-                        System.out.println("Bus ID      : " + result.busID);
-                        System.out.println("Bus Name    : " + result.busName);
+                        System.out.println("Route       : " + result.route);
+                        System.out.println("Source      : " + result.source);
                         System.out.println("Destination : " + result.destination);
-                        System.out.println("Fare        : " + result.fare);
+                        System.out.println("Distance    : " + result.distance);
 
 
                     }
@@ -179,13 +179,13 @@ public class BusReservationSystem {
 
                         System.out.println(
 
-                                b.busID + " | " +
+                                b.route + " | " +
 
-                                        b.busName + " | " +
+                                        b.source + " | " +
 
                                         b.destination +
 
-                                        " | Fare: " + b.fare
+                                        " | Distance: " + b.distance
 
                         );
 
